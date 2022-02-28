@@ -31,7 +31,7 @@ super(name, description, detailedInfo);
 class Inside extends Place{constructor(name, description, detailedInfo)
 {
 super(name, description, detailedInfo);
-this.monsters = [];
+
 
 }}
 
@@ -51,12 +51,15 @@ class Entity
       console.log("You are "+this.name+" Your HP is: "+this.healthPoints + " Your weapon is: "+this.weaponType +","+ " Damage "+this.attackDamage);
   }
   
-  attack(){
-    if(Math.random() < this.hitChance/1){ console.log(this.name + " attacked with "+ this.weaponType + " and hit for "+ this.attackDamage)}
-
-    else{console.log(this.name + " attacked but missed. "+ this.weaponType + " hits just air.")}
-  }
-  displayDetailedInfo(){console.log(this.description)}
+ 
+  
+   
+    
+  
+  displayDetailedInfo(){
+    if(this.healthPoints < 0){console.log("")}
+    else
+    console.log(this.description)}
 }
 
 
@@ -69,19 +72,66 @@ class Player extends Entity
  stopAndRelax() 
  {
  let healed =  Math.floor((Math.random()*10)+1);
- console.log("You stop and sit to catch your breath. You feel at peace and relax. " + healed +"HP Recovered")  
+ if(this.healthPoints < 25)
+ {
+  console.log("You stop and sit to catch your breath. You feel at peace and relax. " + healed +"HP Recovered")
+  this.healthPoints = this.healthPoints + healed;
+ }
+ else{console.log("You stop and relax but you cannot heal anymore. You are at MAX HP")}
  }
 
+ attackHallway(){
+  if(Math.random() < this.hitChance/1 && creatures[0].healthPoints > 0){ 
+    console.log(this.name + " attacked with "+ this.weaponType + " and hit for "+ this.attackDamage)
+    creatures[0].healthPoints-= this.attackDamage
+  }
+  else if (creatures[0].healthPoints >= 0){console.log(this.name + " attacked but missed. "+ this.weaponType + " hits just air.")}
+  else{console.log("Nothing to attack")}
+  if(creatures[0].healthPoints <= 0){console.log(creatures[0].name + " is already dead.")}
+
 }
+  
+
+
+  attackBigRoom(){
+    if(Math.random() < this.hitChance/1 && creatures[1].healthPoints > 0){ 
+      console.log(this.name + " attacked with "+ this.weaponType + " and hit for "+ this.attackDamage)
+      creatures[1].healthPoints-= this.attackDamage
+    }
+  
+    else if (creatures[1].healthPoints >= 0){console.log(this.name + " attacked but missed. "+ this.weaponType + " hits just air.")}
+    else{console.log("Nothing to attack")}
+    if(creatures[1].healthPoints <= 0){console.log(creatures[1].name + " has died.")}
+  
+  }
+
+
+  }
+
 
 class Creatures extends Entity {constructor(name, healthPoints, attackDamage, hitChance, description, weaponType,amount){ 
   
       super(name, healthPoints, attackDamage, hitChance, description,weaponType);
       this.amount = amount;
 }
-inspectCreature(){console.log("\nIn the middle of the "+ Area[currentIndex].name+" is " + this.name + " there are "+ this.amount + " of them")}
+inspectCreature(){
+  if(this.healthPoints <= 0){console.log("There are no creatures left in this room")}
+  else
+  console.log("\nIn the middle of the "+ Area[currentIndex].name+" is " + this.name + " there are "+ this.amount + " of them")}
+
+ attackCreature() 
+ {
+  if(Math.random() < this.hitChance/1 && this.healthPoints > 0){ 
+    console.log(this.name + " attacked with "+ this.weaponType + " and hit for "+ this.attackDamage)
+    player.healthPoints-= this.attackDamage
+  }
+  else if (this.healthPoints > 0){console.log(this.name + " attacked but missed. "+ this.weaponType + " hits just air.")}
+ if(player.healthPoints <= 0){console.log("Player has died."); }
  
-stopAndRelax(){console.log("Hello")}
+ 
+  
+ }
+
 };
   
 class Rat extends Creatures {constructor(name, healthPoints, attackDamage, hitChance, description, weaponType, amount)
@@ -197,7 +247,9 @@ function firstLoop(){
           if (currentIndex < 1){ console.log("You cannot go back now")}
           else  {previous();Area[currentIndex].goBack();}
           break; 
-
+          
+          //HP Recovery system that doesn't actually heal. If I knew how to implement attack system I could do this.
+          //Works now
          case 'Stop and Relax':
           player.stopAndRelax();
           break;
@@ -205,7 +257,7 @@ function firstLoop(){
          case 'Examine Area':
           Area[currentIndex].examineArea();
           //For the rooms when there are enemies
-          if (currentIndex >= 3 && currentIndex < 4){creatures[0].inspectCreature(); creatures[0].displayDetailedInfo();}
+          if (currentIndex >= 3 && currentIndex < 4 ){creatures[0].inspectCreature(); creatures[0].displayDetailedInfo();}
           else if(currentIndex >= 4){creatures[1].inspectCreature();creatures[1].displayDetailedInfo();}
           break;
 
@@ -216,12 +268,12 @@ function firstLoop(){
          case 'detailedInfo':
           player.displayDetailedInfo();
           break;
-
+          //Badly made attack code. Enemies can still attack even dead.
           case 'Attack':
             if(currentIndex<3){console.log("Nothing to attack")}
-            //When the player attacks, the monster attacks after. If I knew how I would make it so that their hp would lower and they could be killed but I just couldn't. Pretty much an attack that does nothing. This uses the damage and hitchance, but doesn't lower hp of enemies or yourself.
-            else if(currentIndex>=3 && currentIndex < 4){player.attack(); creatures[0].attack();}
-            else if(currentIndex>=4){player.attack(); creatures[1].attack();}
+            else if(currentIndex>=3 && currentIndex < 4){player.attackHallway(); creatures[0].attackCreature();}
+            else if(currentIndex>=4){player.attackBigRoom(); creatures[1].attackCreature();}
+            if (currentIndex>=3 && player.healthPoints <=0){continueGame=false;}
             break;
 
          case 'Give Up':

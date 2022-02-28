@@ -1,0 +1,65 @@
+{
+    "Products":
+[
+    {
+        "id":1,
+        "Name": "Shirt",
+        "Info": "Stuff",
+        "Price": 20
+    },
+    {
+        "id":2,
+        "Name": "Pants",
+        "Info": "Stuff",
+        "Price": 50
+    },
+    {
+        "id":3,
+        "Name": "Gloves",
+        "Info": "Stuff",
+        "Price": 15
+    },
+    {
+        "id":4,
+        "Name": "Underwear",
+        "Info": "Stuff",
+        "Price": 5
+    },
+    {
+        "id":5,
+        "Name": "Socks",
+        "Info": "Stuff",
+        "Price": 8
+    },
+    {
+        "id":6,
+        "Name": "Shirt",
+        "Info": "Stuff",
+        "Price": 20
+    },
+    {
+        "id":7,
+        "Name": "Pants",
+        "Info": "Stuff",
+        "Price": 50
+    },
+    {
+        "id":8,
+        "Name": "Gloves",
+        "Info": "Stuff",
+        "Price": 15
+    },
+    {
+        "id":9,
+        "Name": "Underwear",
+        "Info": "Stuff",
+        "Price": 5
+    },
+    {
+        "id":10,
+        "Name": "Socks",
+        "Info": "Stuff",
+        "Price": 8
+    }
+]
+}

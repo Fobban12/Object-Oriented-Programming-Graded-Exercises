@@ -1,0 +1,18 @@
+body{width:50%; margin:auto;display: flex;
+    flex-direction: column; }
+
+#Header{background-color: whitesmoke; color: black; border:1px; padding:20px; }
+#Footer{background-color: whitesmoke; color: black; border:1px; padding:20px}
+
+#Cart{padding-left:89%;}
+#Button{background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;}
+
+#Content{padding-top: 50px; padding-bottom: 50px}
+#allProducts{float:none}
+#Product{float: left; padding:100px}
