@@ -4,7 +4,7 @@ body{width:50%; margin:auto;display: flex;
 #Header{background-color: whitesmoke; color: black; border:1px; padding:20px; }
 #Footer{background-color: whitesmoke; color: black; border:1px; padding:20px}
 
-#Cart{padding-left:89%;}
+#Cart{padding-left:85%;}
 #Button{background: none;
 	color: inherit;
 	border: none;
@@ -13,6 +13,17 @@ body{width:50%; margin:auto;display: flex;
 	cursor: pointer;
 	outline: inherit;}
 
+
 #Content{padding-top: 50px; padding-bottom: 50px}
-#allProducts{float:none}
-#Product{float: left; padding:100px}
+#Product{float: left; }
+#Image{width: 200px;
+    height: 200px;}
+
+
+#ProductDetails{display: flex; flex-direction: column;
+    align-items: center;}
+#BuyNow{border: outset;
+    background: chartreuse;
+    font-size: 50px;}
+#ImageProductDetails{width: 500px; height: 500px}
+
