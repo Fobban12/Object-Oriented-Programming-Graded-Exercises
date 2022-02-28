@@ -1,11 +1,9 @@
 const changeElementProducts = document.getElementById("Content");
 
-
-function cartLook(){
-    
+//Not done cart.
+function cartLook(){  
 changeElementProducts.innerHTML =""
 changeElementProducts.innerHTML =`
-
 <div>
  <div>
   <div>Img</div>
@@ -21,11 +19,7 @@ changeElementProducts.innerHTML =`
 </div>
 
 `
-
-
 }
-
-
 //Details for the chosen product
 function productDetailLook(product)
 {
@@ -34,7 +28,7 @@ function productDetailLook(product)
     `
     <div id="ProductDetails">
     <div><button id="Button" onclick="productLook()"> Go back</button></div>
-      <div><img id="ImageProductDetails"src="${product.Images}"/></div>
+      <div><img id="ImageProductDetails" src="${product.Images}"/></div>
       <div>${product.Name}</div> 
       <div> ${product.Price}&euro; </div>
       <div id="BuyNow"><button id="Button" onclick="cartLook()"> Buy now </Button> </div>
